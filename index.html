@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="/logo.jpeg">
+  <title>SafeStep - Disaster Training Management</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js for charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Leaflet for maps -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+
+    <div class="header-content">
+
+      <div class="logo-section">
+      <img src="/logo.jpeg" alt="" width="50px" height="50px">
+        <div class="logo-text">
+          <h1>SafeStep</h1>
+          <p class="tagline">Disaster Training & Management Platform</p>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="#dashboard" class="nav-link active">Dashboard</a>
+        <a href="#trainings" class="nav-link">Training Events</a>
+        <a href="#analytics" class="nav-link">Analytics</a>
+        <a href="#reports" class="nav-link">Reports</a>
+      </nav>
+
+      <div class="auth-buttons">
+        <button id="signInBtn" class="btn btn-primary">Sign In</button>
+        <button id="logInBtn" class="btn btn-outline">Log In</button>
+        <button id="chatbotbtn" class="btn btn-outline">🤖</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <div class="main-content" style="display: none">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h3>Navigation</h3>
+      </div>
+      <ul class="sidebar-menu">
+        <li>
+          <a href="#dashboard" class="sidebar-link active">📊 Dashboard</a>
+        </li>
+        <li>
+          <a href="#trainings" class="sidebar-link">📚 Training Events</a>
+        </li>
+        <li>
+          <a href="#myenrollments" class="sidebar-link">📋 My Enrollments</a>
+        </li>
+        <li><a href="#profile" class="sidebar-link">👤 My Profile</a></li>
+        <li><a href="#settings" class="sidebar-link">⚙️ Settings</a></li>
+        <li id="adminMenuSeparator" style="
+              border-top: 1px solid #dee2e6;
+              margin-top: 1rem;
+              padding-top: 1rem;
+            ">
+          <strong style="
+                padding: 0 1.5rem;
+                color: #6c757d;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+              ">Admin</strong>
+        </li>
+        <li id="adminTrainingsMenu" style="display: none">
+          <a href="#admin-trainings" class="sidebar-link">⚙️ Manage Trainings</a>
+        </li>
+        <li id="adminAttendanceMenu" style="display: none">
+          <a href="#admin-attendance" class="sidebar-link">✅ Mark Attendance</a>
+        </li>
+        <li id="adminReportsMenu" style="display: none">
+          <a href="#admin-reports" class="sidebar-link">📊 Reports</a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Content Area -->
+    <main class="content">
+      <!-- Dashboard Section -->
+      <section id="dashboard" class="section active">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+          <div class="welcome-section">
+            <h1>Welcome back, Amit! 👋</h1>
+            <p>Here's what's happening with your disaster training programs today.</p>
+          </div>
+          <div class="dashboard-actions">
+            <button class="btn btn-primary">
+              <span class="btn-icon">📚</span>
+              Quick Enroll
+            </button>
+            <button class="btn btn-outline">
+              <span class="btn-icon">📊</span>
+              View Reports
+            </button>
+          </div>
+        </div>
+
+        <!-- Key Metrics Overview -->
+        <div class="metrics-overview">
+          <div class="metric-highlight">
+            <div class="metric-icon">🎯</div>
+            <div class="metric-info">
+              <h3>This Month's Goal</h3>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 78%"></div>
+              </div>
+              <p>78% of 200 participant target achieved</p>
+            </div>
+          </div>
+          <div class="metric-highlight">
+            <div class="metric-icon">⭐</div>
+            <div class="metric-info">
+              <h3>Average Rating</h3>
+              <div class="rating-stars">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star half">★</span>
+              </div>
+              <p>4.7 out of 5.0 from 1,247 reviews</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card primary">
+            <div class="stat-icon">📚</div>
+            <div class="stat-content">
+              <h3>Total Trainings</h3>
+              <p class="stat-value" data-stat="total_trainings">156</p>
+              <span class="stat-change positive">+12% from last month</span>
+            </div>
+            <div class="stat-trend">
+              <svg width="40" height="20" viewBox="0 0 40 20">
+                <path d="M0 15 L10 12 L20 8 L30 5 L40 3" stroke="#28a745" stroke-width="2" fill="none" />
+              </svg>
+            </div>
+          </div>
+          <div class="stat-card success">
+            <div class="stat-icon">👥</div>
+            <div class="stat-content">
+              <h3>Total Participants</h3>
+              <p class="stat-value" data-stat="total_participants">4,200</p>
+              <span class="stat-change positive">+8% from last month</span>
+            </div>
+            <div class="stat-trend">
+              <svg width="40" height="20" viewBox="0 0 40 20">
+                <path d="M0 18 L8 15 L16 12 L24 8 L32 5 L40 2" stroke="#28a745" stroke-width="2" fill="none" />
+              </svg>
+            </div>
+          </div>
+          <div class="stat-card info">
+            <div class="stat-icon">🗺️</div>
+            <div class="stat-content">
+              <h3>States Covered</h3>
+              <p class="stat-value" data-stat="states_covered">28</p>
+              <span class="stat-change neutral">All regions active</span>
+            </div>
+            <div class="stat-badge">100%</div>
+          </div>
+          <div class="stat-card warning">
+            <div class="stat-icon">🚨</div>
+            <div class="stat-content">
+              <h3>Active Alerts</h3>
+              <p class="stat-value">32</p>
+              <span class="stat-change neutral">require attention</span>
+            </div>
+            <div class="stat-action">
+              <button class="btn btn-sm btn-warning">View All</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+          <div class="chart-container featured">
+            <div class="chart-header">
+              <h3>Monthly Training Trends</h3>
+              <div class="chart-controls">
+                <select class="chart-select">
+                  <option value="6months">Last 6 Months</option>
+                  <option value="1year">Last Year</option>
+                  <option value="2years">Last 2 Years</option>
+                </select>
+              </div>
+            </div>
+            <canvas id="trendsChart"></canvas>
+          </div>
+
+          <div class="chart-container">
+            <div class="chart-header">
+              <h3>Training Success Rate</h3>
+            </div>
+            <div class="success-rate">
+              <div class="rate-circle">
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="50" stroke="#e9ecef" stroke-width="8" fill="none" />
+                  <circle cx="60" cy="60" r="50" stroke="#28a745" stroke-width="8" fill="none" stroke-dasharray="314"
+                    stroke-dashoffset="47" stroke-linecap="round" />
+                </svg>
+                <div class="rate-text">
+                  <span class="rate-value">85%</span>
+                  <span class="rate-label">Success</span>
+                </div>
+              </div>
+              <div class="rate-details">
+                <div class="rate-item">
+                  <span class="rate-label">Completion Rate</span>
+                  <span class="rate-value">94.2%</span>
+                </div>
+                <div class="rate-item">
+                  <span class="rate-label">Attendance Rate</span>
+                  <span class="rate-value">87%</span>
+                </div>
+                <div class="rate-item">
+                  <span class="rate-label">Satisfaction</span>
+                  <span class="rate-value">4.7/5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Feed & Quick Actions -->
+        <div class="activity-section">
+          <div class="activity-feed">
+            <h3>Recent Activity</h3>
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-icon success">✅</div>
+                <div class="activity-content">
+                  <p><strong>Disaster Response Training</strong> completed successfully in Mumbai</p>
+                  <span class="activity-time">2 hours ago</span>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon info">👥</div>
+                <div class="activity-content">
+                  <p>50 new participants enrolled in <strong>Risk Assessment Workshop</strong></p>
+                  <span class="activity-time">4 hours ago</span>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon warning">⚠️</div>
+                <div class="activity-content">
+                  <p>Certificate expiry reminder sent to 25 participants</p>
+                  <span class="activity-time">6 hours ago</span>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon primary">📊</div>
+                <div class="activity-content">
+                  <p>Monthly performance report generated and sent to stakeholders</p>
+                  <span class="activity-time">1 day ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="quick-actions">
+            <h3>Quick Actions</h3>
+            <div class="action-buttons">
+              <button class="action-btn">
+                <span class="action-icon">➕</span>
+                <span class="action-text">Create Training</span>
+              </button>
+              <button class="action-btn">
+                <span class="action-icon">📧</span>
+                <span class="action-text">Send Notification</span>
+              </button>
+              <button class="action-btn">
+                <span class="action-icon">📋</span>
+                <span class="action-text">Generate Report</span>
+              </button>
+              <button class="action-btn">
+                <span class="action-icon">👤</span>
+                <span class="action-text">Manage Users</span>
+              </button>
+              <button class="action-btn">
+                <span class="action-icon">⚙️</span>
+                <span class="action-text">System Settings</span>
+              </button>
+              <button class="action-btn">
+                <span class="action-icon">📞</span>
+                <span class="action-text">Support Center</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Events with Enhanced Design -->
+        <div class="recent-events enhanced">
+          <div class="section-header">
+            <h3>Upcoming Training Events</h3>
+            <a href="#trainings" class="view-all-link">View All Events →</a>
+          </div>
+          <div class="events-grid">
+            <div class="event-card featured">
+              <div class="event-badge">Featured</div>
+              <div class="event-content">
+                <h4>Advanced Disaster Response Training</h4>
+                <div class="event-meta">
+                  <span class="event-date">📅 Nov 15-17, 2025</span>
+                  <span class="event-location">📍 Mumbai, Maharashtra</span>
+                </div>
+                <p>Comprehensive training covering flood management, earthquake preparedness, and emergency evacuation
+                  procedures.</p>
+                <div class="event-stats">
+                  <span class="enrollment">42/50 enrolled</span>
+                  <span class="spots-left">8 spots left</span>
+                </div>
+              </div>
+              <div class="event-actions">
+                <button class="btn btn-primary">Enroll Now</button>
+                <button class="btn btn-outline">Learn More</button>
+              </div>
+            </div>
+
+            <div class="event-card">
+              <div class="event-content">
+                <h4>Risk Assessment Workshop</h4>
+                <div class="event-meta">
+                  <span class="event-date">📅 Nov 20-22, 2025</span>
+                  <span class="event-location">📍 Delhi, Delhi</span>
+                </div>
+                <p>Learn to identify, assess, and mitigate disaster risks in urban environments.</p>
+                <div class="event-stats">
+                  <span class="enrollment">28/30 enrolled</span>
+                  <span class="spots-left">2 spots left</span>
+                </div>
+              </div>
+              <div class="event-actions">
+                <button class="btn btn-primary">Enroll Now</button>
+                <button class="btn btn-outline">Learn More</button>
+              </div>
+            </div>
+
+            <div class="event-card">
+              <div class="event-content">
+                <h4>Community Engagement Training</h4>
+                <div class="event-meta">
+                  <span class="event-date">📅 Nov 25-26, 2025</span>
+                  <span class="event-location">📍 Kolkata, West Bengal</span>
+                </div>
+                <p>Training focused on community mobilization and building local disaster response networks.</p>
+                <div class="event-stats">
+                  <span class="enrollment">35/40 enrolled</span>
+                  <span class="spots-left">5 spots left</span>
+                </div>
+              </div>
+              <div class="event-actions">
+                <button class="btn btn-primary">Enroll Now</button>
+                <button class="btn btn-outline">Learn More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Training Events Section -->
+      <section id="trainings" class="section">
+        <h2>Training Events</h2>
+        <p>
+          Training events management interface - Browse and enroll in
+          available trainings
+        </p>
+
+        <div class="training-filters">
+          <div class="filter-group">
+            <label for="stateFilter">Filter by State:</label>
+            <select id="stateFilter" class="form-input">
+              <option value="">All States</option>
+              <option value="Maharashtra">Maharashtra</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+              <option value="West Bengal">West Bengal</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="typeFilter">Training Type:</label>
+            <select id="typeFilter" class="form-input">
+              <option value="">All Types</option>
+              <option value="Disaster Response">Disaster Response</option>
+              <option value="Risk Assessment">Risk Assessment</option>
+              <option value="Community Engagement">Community Engagement</option>
+              <option value="Emergency Management">Emergency Management</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="training-events-grid">
+          <div class="training-card">
+            <div class="training-header">
+              <h3>Disaster Response Training - Mumbai</h3>
+              <span class="training-status status-available">Available</span>
+            </div>
+            <div class="training-details">
+              <p><strong>Date:</strong> Nov 15-17, 2025</p>
+              <p><strong>Location:</strong> Mumbai, Maharashtra</p>
+              <p><strong>Instructor:</strong> Dr. Sunita Patel</p>
+              <p><strong>Capacity:</strong> 42/50 enrolled</p>
+              <p><strong>Description:</strong> Comprehensive disaster response training covering flood management,
+                earthquake preparedness, and emergency evacuation procedures.</p>
+            </div>
+            <div class="training-actions">
+              <button class="btn btn-primary">Enroll Now</button>
+              <button class="btn btn-outline">View Details</button>
+            </div>
+          </div>
+
+          <div class="training-card">
+            <div class="training-header">
+              <h3>Risk Assessment Workshop - Delhi</h3>
+              <span class="training-status status-available">Available</span>
+            </div>
+            <div class="training-details">
+              <p><strong>Date:</strong> Nov 20-22, 2025</p>
+              <p><strong>Location:</strong> Delhi, Delhi</p>
+              <p><strong>Instructor:</strong> Dr. Rajesh Kumar</p>
+              <p><strong>Capacity:</strong> 28/30 enrolled</p>
+              <p><strong>Description:</strong> Learn to identify, assess, and mitigate disaster risks in urban
+                environments. Includes practical exercises and case studies.</p>
+            </div>
+            <div class="training-actions">
+              <button class="btn btn-primary">Enroll Now</button>
+              <button class="btn btn-outline">View Details</button>
+            </div>
+          </div>
+
+          <div class="training-card">
+            <div class="training-header">
+              <h3>Community Engagement Training - Kolkata</h3>
+              <span class="training-status status-full">Full</span>
+            </div>
+            <div class="training-details">
+              <p><strong>Date:</strong> Nov 25-26, 2025</p>
+              <p><strong>Location:</strong> Kolkata, West Bengal</p>
+              <p><strong>Instructor:</strong> Priya Sharma</p>
+              <p><strong>Capacity:</strong> 40/40 enrolled</p>
+              <p><strong>Description:</strong> Training focused on community mobilization, awareness campaigns, and
+                building local disaster response networks.</p>
+            </div>
+            <div class="training-actions">
+              <button class="btn btn-secondary" disabled>Join Waitlist</button>
+              <button class="btn btn-outline">View Details</button>
+            </div>
+          </div>
+
+          <div class="training-card">
+            <div class="training-header">
+              <h3>Emergency Management Course - Bangalore</h3>
+              <span class="training-status status-available">Available</span>
+            </div>
+            <div class="training-details">
+              <p><strong>Date:</strong> Dec 1-3, 2025</p>
+              <p><strong>Location:</strong> Bangalore, Karnataka</p>
+              <p><strong>Instructor:</strong> Prof. Anil Gupta</p>
+              <p><strong>Capacity:</strong> 15/35 enrolled</p>
+              <p><strong>Description:</strong> Advanced emergency management techniques including resource allocation,
+                coordination with agencies, and post-disaster recovery planning.</p>
+            </div>
+            <div class="training-actions">
+              <button class="btn btn-primary">Enroll Now</button>
+              <button class="btn btn-outline">View Details</button>
+            </div>
+          </div>
+
+          <div class="training-card">
+            <div class="training-header">
+              <h3>Flood Response Training - Chennai</h3>
+              <span class="training-status status-available">Available</span>
+            </div>
+            <div class="training-details">
+              <p><strong>Date:</strong> Dec 5-7, 2025</p>
+              <p><strong>Location:</strong> Chennai, Tamil Nadu</p>
+              <p><strong>Instructor:</strong> Capt. Ramesh Iyer</p>
+              <p><strong>Capacity:</strong> 22/45 enrolled</p>
+              <p><strong>Description:</strong> Specialized training for flood response including water rescue
+                techniques, flood mapping, and temporary shelter management.</p>
+            </div>
+            <div class="training-actions">
+              <button class="btn btn-primary">Enroll Now</button>
+              <button class="btn btn-outline">View Details</button>
+            </div>
+          </div>
+
+          <div class="training-card">
+            <div class="training-header">
+              <h3>Earthquake Preparedness - Ahmedabad</h3>
+              <span class="training-status status-cancelled">Cancelled</span>
+            </div>
+            <div class="training-details">
+              <p><strong>Date:</strong> Dec 10-12, 2025</p>
+              <p><strong>Location:</strong> Ahmedabad, Gujarat</p>
+              <p><strong>Instructor:</strong> Dr. Meera Shah</p>
+              <p><strong>Capacity:</strong> 0/40 enrolled</p>
+              <p><strong>Description:</strong> Comprehensive earthquake preparedness training covering building safety,
+                evacuation procedures, and search and rescue operations.</p>
+            </div>
+            <div class="training-actions">
+              <button class="btn btn-secondary" disabled>Registration Closed</button>
+              <button class="btn btn-outline">View Details</button>
+            </div>
+          </div>
+
+          <div class="training-card">
+            <div class="training-header">
+              <h3>Cyclone Management Workshop - Bhubaneswar</h3>
+              <span class="training-status status-available">Available</span>
+            </div>
+            <div class="training-details">
+              <p><strong>Date:</strong> Dec 15-16, 2025</p>
+              <p><strong>Location:</strong> Bhubaneswar, Odisha</p>
+              <p><strong>Instructor:</strong> Dr. Sandeep Mohanty</p>
+              <p><strong>Capacity:</strong> 8/25 enrolled</p>
+              <p><strong>Description:</strong> Workshop on cyclone prediction, early warning systems, and community
+                preparedness for coastal regions.</p>
+            </div>
+            <div class="training-actions">
+              <button class="btn btn-primary">Enroll Now</button>
+              <button class="btn btn-outline">View Details</button>
+            </div>
+          </div>
+
+          <div class="training-card">
+            <div class="training-header">
+              <h3>Medical Emergency Response - Hyderabad</h3>
+              <span class="training-status status-available">Available</span>
+            </div>
+            <div class="training-details">
+              <p><strong>Date:</strong> Dec 20-22, 2025</p>
+              <p><strong>Location:</strong> Hyderabad, Telangana</p>
+              <p><strong>Instructor:</strong> Dr. Kavita Reddy</p>
+              <p><strong>Capacity:</strong> 31/50 enrolled</p>
+              <p><strong>Description:</strong> Medical emergency response training for disaster scenarios including
+                triage, first aid, and coordination with medical teams.</p>
+            </div>
+            <div class="training-actions">
+              <button class="btn btn-primary">Enroll Now</button>
+              <button class="btn btn-outline">View Details</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Analytics Section -->
+      <section id="analytics" class="section">
+        <h2>Analytics</h2>
+        <p>Comprehensive analytics and insights for disaster training programs</p>
+
+        <div class="analytics-overview">
+          <div class="analytics-card">
+            <h3>Training Participation Trends</h3>
+            <div class="chart-container">
+              <canvas id="participationChart"></canvas>
+            </div>
+          </div>
+
+          <div class="analytics-card">
+            <h3>Regional Distribution</h3>
+            <div class="chart-container">
+              <canvas id="regionalChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-grid">
+          <div class="analytics-card">
+            <h3>Key Performance Indicators</h3>
+            <div class="kpi-grid">
+              <div class="kpi-item">
+                <div class="kpi-value">94.2%</div>
+                <div class="kpi-label">Completion Rate</div>
+                <div class="kpi-change positive">+2.1% from last quarter</div>
+              </div>
+              <div class="kpi-item">
+                <div class="kpi-value">4.8</div>
+                <div class="kpi-label">Avg Rating</div>
+                <div class="kpi-change positive">+0.3 from last quarter</div>
+              </div>
+              <div class="kpi-item">
+                <div class="kpi-value">87%</div>
+                <div class="kpi-label">Attendance Rate</div>
+                <div class="kpi-change positive">+5.2% from last quarter</div>
+              </div>
+              <div class="kpi-item">
+                <div class="kpi-value">156</div>
+                <div class="kpi-label">Total Trainings</div>
+                <div class="kpi-change positive">+12 from last quarter</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="analytics-card">
+            <h3>Training Types Distribution</h3>
+            <div class="chart-container">
+              <canvas id="trainingTypesChart"></canvas>
+            </div>
+          </div>
+
+          <div class="analytics-card">
+            <h3>Monthly Enrollment Trends</h3>
+            <div class="chart-container">
+              <canvas id="enrollmentTrendsChart"></canvas>
+            </div>
+          </div>
+
+          <div class="analytics-card">
+            <h3>Top Performing States</h3>
+            <div class="states-list">
+              <div class="state-item">
+                <div class="state-name">Maharashtra</div>
+                <div class="state-stats">
+                  <span class="state-participants">2,450</span>
+                  <span class="state-completion">96%</span>
+                </div>
+              </div>
+              <div class="state-item">
+                <div class="state-name">Uttar Pradesh</div>
+                <div class="state-stats">
+                  <span class="state-participants">1,890</span>
+                  <span class="state-completion">93%</span>
+                </div>
+              </div>
+              <div class="state-item">
+                <div class="state-name">West Bengal</div>
+                <div class="state-stats">
+                  <span class="state-participants">1,675</span>
+                  <span class="state-completion">91%</span>
+                </div>
+              </div>
+              <div class="state-item">
+                <div class="state-name">Bihar</div>
+                <div class="state-stats">
+                  <span class="state-participants">1,432</span>
+                  <span class="state-completion">89%</span>
+                </div>
+              </div>
+              <div class="state-item">
+                <div class="state-name">Tamil Nadu</div>
+                <div class="state-stats">
+                  <span class="state-participants">1,298</span>
+                  <span class="state-completion">94%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="analytics-card">
+            <h3>Disaster Types Coverage</h3>
+            <div class="disaster-types">
+              <div class="disaster-item">
+                <div class="disaster-name">Flood Response</div>
+                <div class="disaster-progress">
+                  <div class="progress-bar" style="width: 85%"></div>
+                </div>
+                <div class="disaster-percentage">85%</div>
+              </div>
+              <div class="disaster-item">
+                <div class="disaster-name">Earthquake Preparedness</div>
+                <div class="disaster-progress">
+                  <div class="progress-bar" style="width: 72%"></div>
+                </div>
+                <div class="disaster-percentage">72%</div>
+              </div>
+              <div class="disaster-item">
+                <div class="disaster-name">Cyclone Management</div>
+                <div class="disaster-progress">
+                  <div class="progress-bar" style="width: 68%"></div>
+                </div>
+                <div class="disaster-percentage">68%</div>
+              </div>
+              <div class="disaster-item">
+                <div class="disaster-name">Medical Emergency</div>
+                <div class="disaster-progress">
+                  <div class="progress-bar" style="width: 91%"></div>
+                </div>
+                <div class="disaster-percentage">91%</div>
+              </div>
+              <div class="disaster-item">
+                <div class="disaster-name">Fire Safety</div>
+                <div class="disaster-progress">
+                  <div class="progress-bar" style="width: 76%"></div>
+                </div>
+                <div class="disaster-percentage">76%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="analytics-card">
+            <h3>Recent Performance Insights</h3>
+            <div class="insights-list">
+              <div class="insight-item">
+                <div class="insight-icon">📈</div>
+                <div class="insight-content">
+                  <p><strong>Maharashtra</strong> shows highest improvement in completion rates</p>
+                  <span class="insight-date">Last 30 days</span>
+                </div>
+              </div>
+              <div class="insight-item">
+                <div class="insight-icon">🎯</div>
+                <div class="insight-content">
+                  <p>Flood response training has 15% higher engagement than other types</p>
+                  <span class="insight-date">Last 90 days</span>
+                </div>
+              </div>
+              <div class="insight-item">
+                <div class="insight-icon">⭐</div>
+                <div class="insight-content">
+                  <p>Average training rating improved by 0.3 points this quarter</p>
+                  <span class="insight-date">This quarter</span>
+                </div>
+              </div>
+              <div class="insight-item">
+                <div class="insight-icon">👥</div>
+                <div class="insight-content">
+                  <p>Community training programs show 23% higher retention</p>
+                  <span class="insight-date">Last 6 months</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reports Section -->
+      <section id="reports" class="section">
+        <h2>Reports</h2>
+        <p>Generate and download comprehensive reports for training programs and performance metrics</p>
+
+        <div class="reports-overview">
+          <div class="report-card featured">
+            <div class="report-icon">📊</div>
+            <div class="report-content">
+              <h3>Training Summary Report</h3>
+              <p>Comprehensive overview of all training programs, participation rates, and outcomes</p>
+              <div class="report-meta">
+                <span class="report-date">Generated: Feb 2026</span>
+                <span class="report-size">2.4 MB</span>
+              </div>
+            </div>
+            <div class="report-actions">
+              <button class="btn btn-primary">Download PDF</button>
+              <button class="btn btn-outline">View Online</button>
+            </div>
+          </div>
+
+          <div class="report-card">
+            <div class="report-icon">📈</div>
+            <div class="report-content">
+              <h3>Performance Analytics</h3>
+              <p>Detailed performance metrics and trends analysis for the past quarter</p>
+              <div class="report-meta">
+                <span class="report-date">Generated: Feb 2026</span>
+                <span class="report-size">1.8 MB</span>
+              </div>
+            </div>
+            <div class="report-actions">
+              <button class="btn btn-primary">Download PDF</button>
+              <button class="btn btn-outline">View Online</button>
+            </div>
+          </div>
+
+          <div class="report-card">
+            <div class="report-icon">👥</div>
+            <div class="report-content">
+              <h3>Participant Directory</h3>
+              <p>Complete list of all registered participants with contact information</p>
+              <div class="report-meta">
+                <span class="report-date">Generated: Feb 2026</span>
+                <span class="report-size">3.2 MB</span>
+              </div>
+            </div>
+            <div class="report-actions">
+              <button class="btn btn-primary">Download PDF</button>
+              <button class="btn btn-outline">View Online</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="reports-grid">
+          <div class="reports-section">
+            <h3>Training Reports</h3>
+            <div class="report-list">
+              <div class="report-item">
+                <div class="report-info">
+                  <h4>Monthly Training Report - January 2026</h4>
+                  <p>Summary of all training activities and outcomes</p>
+                  <div class="report-meta">
+                    <span class="report-format">PDF</span>
+                    <span class="report-size">1.2 MB</span>
+                  </div>
+                </div>
+                <button class="btn btn-sm">Download</button>
+              </div>
+
+              <div class="report-item">
+                <div class="report-info">
+                  <h4>State-wise Training Coverage Report</h4>
+                  <p>Geographical distribution and coverage analysis</p>
+                  <div class="report-meta">
+                    <span class="report-format">PDF</span>
+                    <span class="report-size">2.1 MB</span>
+                  </div>
+                </div>
+                <button class="btn btn-sm">Download</button>
+              </div>
+
+              <div class="report-item">
+                <div class="report-info">
+                  <h4>Training Effectiveness Assessment</h4>
+                  <p>Evaluation of training program impact and success metrics</p>
+                  <div class="report-meta">
+                    <span class="report-format">PDF</span>
+                    <span class="report-size">1.8 MB</span>
+                  </div>
+                </div>
+                <button class="btn btn-sm">Download</button>
+              </div>
+
+              <div class="report-item">
+                <div class="report-info">
+                  <h4>Disaster Response Training Report</h4>
+                  <p>Specialized report on disaster response training programs</p>
+                  <div class="report-meta">
+                    <span class="report-format">PDF</span>
+                    <span class="report-size">1.5 MB</span>
+                  </div>
+                </div>
+                <button class="btn btn-sm">Download</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="reports-section">
+            <h3>Compliance & Certification Reports</h3>
+            <div class="report-list">
+              <div class="report-item">
+                <div class="report-info">
+                  <h4>Certification Status Report</h4>
+                  <p>Current certification status of all active participants</p>
+                  <div class="report-meta">
+                    <span class="report-format">Excel</span>
+                    <span class="report-size">890 KB</span>
+                  </div>
+                </div>
+                <button class="btn btn-sm">Download</button>
+              </div>
+
+              <div class="report-item">
+                <div class="report-info">
+                  <h4>Compliance Tracking Report</h4>
+                  <p>Regulatory compliance and mandatory training completion</p>
+                  <div class="report-meta">
+                    <span class="report-format">PDF</span>
+                    <span class="report-size">1.3 MB</span>
+                  </div>
+                </div>
+                <button class="btn btn-sm">Download</button>
+              </div>
+
+              <div class="report-item">
+                <div class="report-info">
+                  <h4>Certificate Expiry Report</h4>
+                  <p>List of certificates expiring in the next 6 months</p>
+                  <div class="report-meta">
+                    <span class="report-format">Excel</span>
+                    <span class="report-size">756 KB</span>
+                  </div>
+                </div>
+                <button class="btn btn-sm">Download</button>
+              </div>
+
+              <div class="report-item">
+                <div class="report-info">
+                  <h4>Training Gap Analysis</h4>
+                  <p>Identification of training needs and coverage gaps</p>
+                  <div class="report-meta">
+                    <span class="report-format">PDF</span>
+                    <span class="report-size">2.0 MB</span>
+                  </div>
+                </div>
+                <button class="btn btn-sm">Download</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="reports-section">
+            <h3>Custom Reports</h3>
+            <div class="custom-report-generator">
+              <h4>Generate Custom Report</h4>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Report Type</label>
+                  <select class="form-input">
+                    <option value="">Select report type...</option>
+                    <option value="training">Training Summary</option>
+                    <option value="participant">Participant Analysis</option>
+                    <option value="performance">Performance Metrics</option>
+                    <option value="compliance">Compliance Report</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Date Range</label>
+                  <select class="form-input">
+                    <option value="last-month">Last Month</option>
+                    <option value="last-quarter">Last Quarter</option>
+                    <option value="last-year">Last Year</option>
+                    <option value="custom">Custom Range</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>State Filter</label>
+                  <select class="form-input">
+                    <option value="">All States</option>
+                    <option value="maharashtra">Maharashtra</option>
+                    <option value="delhi">Delhi</option>
+                    <option value="karnataka">Karnataka</option>
+                    <option value="tamil-nadu">Tamil Nadu</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Format</label>
+                  <select class="form-input">
+                    <option value="pdf">PDF</option>
+                    <option value="excel">Excel</option>
+                    <option value="csv">CSV</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn btn-primary">Generate Report</button>
+                <button class="btn btn-outline">Preview</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="reports-section">
+            <h3>Scheduled Reports</h3>
+            <div class="scheduled-reports">
+              <div class="scheduled-item">
+                <div class="schedule-info">
+                  <h4>Monthly Training Summary</h4>
+                  <p>Automatically generated on the 1st of each month</p>
+                  <div class="schedule-status">
+                    <span class="status-active">Active</span>
+                    <span class="next-run">Next: Mar 1, 2026</span>
+                  </div>
+                </div>
+                <div class="schedule-actions">
+                  <button class="btn btn-sm">Edit</button>
+                  <button class="btn btn-sm btn-danger">Pause</button>
+                </div>
+              </div>
+
+              <div class="scheduled-item">
+                <div class="schedule-info">
+                  <h4>Quarterly Performance Report</h4>
+                  <p>Comprehensive quarterly analysis and insights</p>
+                  <div class="schedule-status">
+                    <span class="status-active">Active</span>
+                    <span class="next-run">Next: Apr 1, 2026</span>
+                  </div>
+                </div>
+                <div class="schedule-actions">
+                  <button class="btn btn-sm">Edit</button>
+                  <button class="btn btn-sm btn-danger">Pause</button>
+                </div>
+              </div>
+
+              <div class="scheduled-item">
+                <div class="schedule-info">
+                  <h4>Compliance Status Update</h4>
+                  <p>Weekly compliance and certification status</p>
+                  <div class="schedule-status">
+                    <span class="status-paused">Paused</span>
+                    <span class="next-run">Resume to schedule</span>
+                  </div>
+                </div>
+                <div class="schedule-actions">
+                  <button class="btn btn-sm">Edit</button>
+                  <button class="btn btn-sm btn-success">Resume</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- My Enrollments Section -->
+      <section id="myenrollments" class="section">
+        <h2>My Enrollments</h2>
+        <p>View your enrolled trainings and enrollment status</p>
+
+        <div class="enrollment-stats">
+          <div class="stat-card">
+            <h3>Total Enrollments</h3>
+            <p class="stat-value">5</p>
+          </div>
+          <div class="stat-card">
+            <h3>Upcoming</h3>
+            <p class="stat-value">3</p>
+          </div>
+          <div class="stat-card">
+            <h3>Completed</h3>
+            <p class="stat-value">2</p>
+          </div>
+          <div class="stat-card">
+            <h3>Certificates Earned</h3>
+            <p class="stat-value">2</p>
+          </div>
+        </div>
+
+        <div class="enrollment-filters">
+          <button class="filter-btn active" data-filter="all">All Enrollments</button>
+          <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+          <button class="filter-btn" data-filter="completed">Completed</button>
+          <button class="filter-btn" data-filter="pending">Pending</button>
+        </div>
+
+        <div class="enrollment-list">
+          <div class="enrollment-card" data-status="upcoming">
+            <div class="enrollment-header">
+              <h3>Disaster Response Training - Mumbai</h3>
+              <span class="enrollment-status status-confirmed">Confirmed</span>
+            </div>
+            <div class="enrollment-details">
+              <p><strong>Date:</strong> Nov 15-17, 2025</p>
+              <p><strong>Location:</strong> Mumbai, Maharashtra</p>
+              <p><strong>Instructor:</strong> Dr. Sunita Patel</p>
+              <p><strong>Enrollment ID:</strong> ENR-2025-001</p>
+              <p><strong>Status:</strong> <span class="status-text confirmed">Confirmed - Payment Received</span></p>
+            </div>
+            <div class="enrollment-actions">
+              <button class="btn btn-outline">View Details</button>
+              <button class="btn btn-outline">Download Materials</button>
+              <button class="btn btn-danger">Cancel Enrollment</button>
+            </div>
+          </div>
+
+          <div class="enrollment-card" data-status="upcoming">
+            <div class="enrollment-header">
+              <h3>Risk Assessment Workshop - Delhi</h3>
+              <span class="enrollment-status status-confirmed">Confirmed</span>
+            </div>
+            <div class="enrollment-details">
+              <p><strong>Date:</strong> Nov 20-22, 2025</p>
+              <p><strong>Location:</strong> Delhi, Delhi</p>
+              <p><strong>Instructor:</strong> Dr. Rajesh Kumar</p>
+              <p><strong>Enrollment ID:</strong> ENR-2025-002</p>
+              <p><strong>Status:</strong> <span class="status-text confirmed">Confirmed - Payment Received</span></p>
+            </div>
+            <div class="enrollment-actions">
+              <button class="btn btn-outline">View Details</button>
+              <button class="btn btn-outline">Download Materials</button>
+              <button class="btn btn-danger">Cancel Enrollment</button>
+            </div>
+          </div>
+
+          <div class="enrollment-card" data-status="pending">
+            <div class="enrollment-header">
+              <h3>Emergency Management Course - Bangalore</h3>
+              <span class="enrollment-status status-pending">Pending</span>
+            </div>
+            <div class="enrollment-details">
+              <p><strong>Date:</strong> Dec 1-3, 2025</p>
+              <p><strong>Location:</strong> Bangalore, Karnataka</p>
+              <p><strong>Instructor:</strong> Prof. Anil Gupta</p>
+              <p><strong>Enrollment ID:</strong> ENR-2025-003</p>
+              <p><strong>Status:</strong> <span class="status-text pending">Payment Pending - Complete payment to
+                  confirm</span></p>
+            </div>
+            <div class="enrollment-actions">
+              <button class="btn btn-primary">Complete Payment</button>
+              <button class="btn btn-outline">View Details</button>
+              <button class="btn btn-danger">Cancel Enrollment</button>
+            </div>
+          </div>
+
+          <div class="enrollment-card" data-status="completed">
+            <div class="enrollment-header">
+              <h3>Community Engagement Training - Kolkata</h3>
+              <span class="enrollment-status status-completed">Completed</span>
+            </div>
+            <div class="enrollment-details">
+              <p><strong>Date:</strong> Oct 25-26, 2025</p>
+              <p><strong>Location:</strong> Kolkata, West Bengal</p>
+              <p><strong>Instructor:</strong> Priya Sharma</p>
+              <p><strong>Enrollment ID:</strong> ENR-2025-004</p>
+              <p><strong>Status:</strong> <span class="status-text completed">Completed - Certificate Available</span>
+              </p>
+              <p><strong>Attendance:</strong> 100%</p>
+              <p><strong>Grade:</strong> A (95%)</p>
+            </div>
+            <div class="enrollment-actions">
+              <button class="btn btn-success">Download Certificate</button>
+              <button class="btn btn-outline">View Feedback</button>
+              <button class="btn btn-outline">Leave Review</button>
+            </div>
+          </div>
+
+          <div class="enrollment-card" data-status="completed">
+            <div class="enrollment-header">
+              <h3>Flood Response Training - Chennai</h3>
+              <span class="enrollment-status status-completed">Completed</span>
+            </div>
+            <div class="enrollment-details">
+              <p><strong>Date:</strong> Oct 5-7, 2025</p>
+              <p><strong>Location:</strong> Chennai, Tamil Nadu</p>
+              <p><strong>Instructor:</strong> Capt. Ramesh Iyer</p>
+              <p><strong>Enrollment ID:</strong> ENR-2025-005</p>
+              <p><strong>Status:</strong> <span class="status-text completed">Completed - Certificate Available</span>
+              </p>
+              <p><strong>Attendance:</strong> 95%</p>
+              <p><strong>Grade:</strong> B+ (88%)</p>
+            </div>
+            <div class="enrollment-actions">
+              <button class="btn btn-success">Download Certificate</button>
+              <button class="btn btn-outline">View Feedback</button>
+              <button class="btn btn-outline">Leave Review</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Profile Section -->
+      <section id="profile" class="section">
+        <h2>My Profile</h2>
+        <p>View and manage your profile information</p>
+
+        <div class="profile-container">
+          <div class="profile-header">
+            <div class="profile-avatar">
+              <div class="avatar-circle">
+                <span class="avatar-text">AS</span>
+              </div>
+            </div>
+            <div class="profile-info">
+              <h3>Amit Sharma</h3>
+              <p class="profile-role">Disaster Management Officer</p>
+              <p class="profile-location">Mumbai, Maharashtra</p>
+              <div class="profile-stats">
+                <span class="stat-item">5 Enrollments</span>
+                <span class="stat-item">2 Certificates</span>
+                <span class="stat-item">Member since 2024</span>
+              </div>
+            </div>
+            <div class="profile-actions">
+              <button class="btn btn-primary">Edit Profile</button>
+              <button class="btn btn-outline">Change Password</button>
+            </div>
+          </div>
+
+          <div class="profile-content">
+            <div class="profile-section">
+              <h4>Personal Information</h4>
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Full Name</label>
+                  <p>Amit Sharma</p>
+                </div>
+                <div class="info-item">
+                  <label>Email Address</label>
+                  <p>amit.sharma@example.com</p>
+                </div>
+                <div class="info-item">
+                  <label>Phone Number</label>
+                  <p>+91 98765 43210</p>
+                </div>
+                <div class="info-item">
+                  <label>Date of Birth</label>
+                  <p>15 March 1985</p>
+                </div>
+                <div class="info-item">
+                  <label>Gender</label>
+                  <p>Male</p>
+                </div>
+                <div class="info-item">
+                  <label>Employee ID</label>
+                  <p>DMO-2024-001</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-section">
+              <h4>Professional Information</h4>
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Organization</label>
+                  <p>National Disaster Management Authority</p>
+                </div>
+                <div class="info-item">
+                  <label>Department</label>
+                  <p>Emergency Response Division</p>
+                </div>
+                <div class="info-item">
+                  <label>Designation</label>
+                  <p>Disaster Management Officer</p>
+                </div>
+                <div class="info-item">
+                  <label>Experience</label>
+                  <p>8 years</p>
+                </div>
+                <div class="info-item">
+                  <label>Specialization</label>
+                  <p>Flood Response & Community Training</p>
+                </div>
+                <div class="info-item">
+                  <label>Certification Level</label>
+                  <p>Advanced Responder</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-section">
+              <h4>Address Information</h4>
+              <div class="info-grid">
+                <div class="info-item full-width">
+                  <label>Residential Address</label>
+                  <p>123 Disaster Response Street, Andheri West, Mumbai - 400058, Maharashtra, India</p>
+                </div>
+                <div class="info-item">
+                  <label>State</label>
+                  <p>Maharashtra</p>
+                </div>
+                <div class="info-item">
+                  <label>District</label>
+                  <p>Mumbai Suburban</p>
+                </div>
+                <div class="info-item">
+                  <label>PIN Code</label>
+                  <p>400058</p>
+                </div>
+                <div class="info-item">
+                  <label>Emergency Contact</label>
+                  <p>Priya Sharma (+91 87654 32109)</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-section">
+              <h4>Training & Certification Summary</h4>
+              <div class="certification-grid">
+                <div class="cert-card">
+                  <div class="cert-icon">🏆</div>
+                  <div class="cert-info">
+                    <h5>Advanced Disaster Response</h5>
+                    <p>Certified: Dec 2024</p>
+                    <p>Valid until: Dec 2027</p>
+                  </div>
+                </div>
+                <div class="cert-card">
+                  <div class="cert-icon">🌊</div>
+                  <div class="cert-info">
+                    <h5>Flood Response Specialist</h5>
+                    <p>Certified: Oct 2024</p>
+                    <p>Valid until: Oct 2027</p>
+                  </div>
+                </div>
+                <div class="cert-card">
+                  <div class="cert-icon">👥</div>
+                  <div class="cert-info">
+                    <h5>Community Training Facilitator</h5>
+                    <p>Certified: Sep 2024</p>
+                    <p>Valid until: Sep 2026</p>
+                  </div>
+                </div>
+                <div class="cert-card">
+                  <div class="cert-icon">🚨</div>
+                  <div class="cert-info">
+                    <h5>Emergency Management</h5>
+                    <p>In Progress</p>
+                    <p>Expected: Dec 2025</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-section">
+              <h4>Recent Activity</h4>
+              <div class="activity-list">
+                <div class="activity-item">
+                  <div class="activity-icon">📚</div>
+                  <div class="activity-content">
+                    <p>Completed <strong>Community Engagement Training</strong></p>
+                    <span class="activity-date">2 weeks ago</span>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon">🎓</div>
+                  <div class="activity-content">
+                    <p>Earned <strong>Flood Response Specialist</strong> certificate</p>
+                    <span class="activity-date">1 month ago</span>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon">📝</div>
+                  <div class="activity-content">
+                    <p>Enrolled in <strong>Emergency Management Course</strong></p>
+                    <span class="activity-date">2 months ago</span>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon">✅</div>
+                  <div class="activity-content">
+                    <p>Attended <strong>Risk Assessment Workshop</strong></p>
+                    <span class="activity-date">3 months ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings Section -->
+      <section id="settings" class="section">
+        <h2>Settings</h2>
+        <p>Manage your account preferences and application settings</p>
+
+        <div class="settings-container">
+          <div class="settings-sidebar">
+            <div class="settings-nav">
+              <button class="settings-tab active" data-tab="account">Account Settings</button>
+              <button class="settings-tab" data-tab="notifications">Notifications</button>
+              <button class="settings-tab" data-tab="privacy">Privacy & Security</button>
+              <button class="settings-tab" data-tab="appearance">Appearance</button>
+              <button class="settings-tab" data-tab="training">Training Preferences</button>
+              <button class="settings-tab" data-tab="data">Data & Export</button>
+            </div>
+          </div>
+
+          <div class="settings-content">
+            <!-- Account Settings Tab -->
+            <div class="settings-panel active" id="account-panel">
+              <h3>Account Settings</h3>
+
+              <div class="settings-section">
+                <h4>Profile Information</h4>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" class="form-input" value="Amit">
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" class="form-input" value="Sharma">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-input" value="amit.sharma@example.com">
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-input" value="+91 98765 43210">
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <h4>Professional Information</h4>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="organization">Organization</label>
+                    <input type="text" id="organization" class="form-input"
+                      value="National Disaster Management Authority">
+                  </div>
+                  <div class="form-group">
+                    <label for="designation">Designation</label>
+                    <input type="text" id="designation" class="form-input" value="Disaster Management Officer">
+                  </div>
+                  <div class="form-group">
+                    <label for="employeeId">Employee ID</label>
+                    <input type="text" id="employeeId" class="form-input" value="DMO-2024-001">
+                  </div>
+                  <div class="form-group">
+                    <label for="state">State</label>
+                    <select id="state" class="form-input">
+                      <option value="maharashtra" selected>Maharashtra</option>
+                      <option value="delhi">Delhi</option>
+                      <option value="karnataka">Karnataka</option>
+                      <option value="tamil-nadu">Tamil Nadu</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-actions">
+                <button class="btn btn-primary">Save Changes</button>
+                <button class="btn btn-outline">Cancel</button>
+              </div>
+            </div>
+
+            <!-- Notifications Tab -->
+            <div class="settings-panel" id="notifications-panel">
+              <h3>Notification Preferences</h3>
+
+              <div class="settings-section">
+                <h4>Email Notifications</h4>
+                <div class="notification-options">
+                  <div class="notification-item">
+                    <div class="notification-info">
+                      <h5>Training Updates</h5>
+                      <p>Receive notifications about new training programs and updates</p>
+                    </div>
+                    <label class="toggle">
+                      <input type="checkbox" checked>
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+
+                  <div class="notification-item">
+                    <div class="notification-info">
+                      <h5>Enrollment Confirmations</h5>
+                      <p>Get notified when your training enrollments are confirmed</p>
+                    </div>
+                    <label class="toggle">
+                      <input type="checkbox" checked>
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+
+                  <div class="notification-item">
+                    <div class="notification-info">
+                      <h5>Certificate Alerts</h5>
+                      <p>Notifications about certificate availability and expiry</p>
+                    </div>
+                    <label class="toggle">
+                      <input type="checkbox" checked>
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+
+                  <div class="notification-item">
+                    <div class="notification-info">
+                      <h5>System Announcements</h5>
+                      <p>Important announcements and system updates</p>
+                    </div>
+                    <label class="toggle">
+                      <input type="checkbox">
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <h4>Push Notifications</h4>
+                <div class="notification-options">
+                  <div class="notification-item">
+                    <div class="notification-info">
+                      <h5>Browser Notifications</h5>
+                      <p>Receive push notifications in your browser</p>
+                    </div>
+                    <label class="toggle">
+                      <input type="checkbox">
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+
+                  <div class="notification-item">
+                    <div class="notification-info">
+                      <h5>Mobile App Notifications</h5>
+                      <p>Push notifications on mobile devices</p>
+                    </div>
+                    <label class="toggle">
+                      <input type="checkbox" checked>
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-actions">
+                <button class="btn btn-primary">Save Preferences</button>
+                <button class="btn btn-outline">Reset to Default</button>
+              </div>
+            </div>
+
+            <!-- Privacy & Security Tab -->
+            <div class="settings-panel" id="privacy-panel">
+              <h3>Privacy & Security</h3>
+
+              <div class="settings-section">
+                <h4>Password & Authentication</h4>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" class="form-input">
+                  </div>
+                  <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" class="form-input">
+                  </div>
+                  <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" class="form-input">
+                  </div>
+                </div>
+                <div class="settings-actions">
+                  <button class="btn btn-primary">Update Password</button>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <h4>Data Privacy</h4>
+                <div class="privacy-options">
+                  <div class="privacy-item">
+                    <div class="privacy-info">
+                      <h5>Data Collection</h5>
+                      <p>Allow collection of usage data to improve our services</p>
+                    </div>
+                    <label class="toggle">
+                      <input type="checkbox" checked>
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+
+                  <div class="privacy-item">
+                    <div class="privacy-info">
+                      <h5>Profile Visibility</h5>
+                      <p>Make your profile visible to other training participants</p>
+                    </div>
+                    <label class="toggle">
+                      <input type="checkbox">
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+
+                  <div class="privacy-item">
+                    <div class="privacy-info">
+                      <h5>Marketing Communications</h5>
+                      <p>Receive updates about new training programs and features</p>
+                    </div>
+                    <label class="toggle">
+                      <input type="checkbox">
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <h4>Account Management</h4>
+                <div class="account-actions">
+                  <button class="btn btn-warning">Download My Data</button>
+                  <button class="btn btn-danger">Delete Account</button>
+                </div>
+                <p class="warning-text">These actions cannot be undone. Please proceed with caution.</p>
+              </div>
+            </div>
+
+            <!-- Appearance Tab -->
+            <div class="settings-panel" id="appearance-panel">
+              <h3>Appearance Settings</h3>
+
+              <div class="settings-section">
+                <h4>Theme</h4>
+                <div class="theme-options">
+                  <div class="theme-option active" data-theme="light">
+                    <div class="theme-preview light-theme"></div>
+                    <span>Light</span>
+                  </div>
+                  <div class="theme-option" data-theme="dark">
+                    <div class="theme-preview dark-theme"></div>
+                    <span>Dark</span>
+                  </div>
+                  <div class="theme-option" data-theme="auto">
+                    <div class="theme-preview auto-theme"></div>
+                    <span>Auto</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <h4>Language</h4>
+                <div class="form-group">
+                  <label for="language">Preferred Language</label>
+                  <select id="language" class="form-input">
+                    <option value="en" selected>English</option>
+                    <option value="hi">Hindi</option>
+                    <option value="mr">Marathi</option>
+                    <option value="ta">Tamil</option>
+                    <option value="te">Telugu</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <h4>Display Options</h4>
+                <div class="display-options">
+                  <div class="display-item">
+                    <div class="display-info">
+                      <h5>Compact Mode</h5>
+                      <p>Show more content in less space</p>
+                    </div>
+                    <label class="toggle">
+                      <input type="checkbox">
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+
+                  <div class="display-item">
+                    <div class="display-info">
+                      <h5>High Contrast</h5>
+                      <p>Increase contrast for better visibility</p>
+                    </div>
+                    <label class="toggle">
+                      <input type="checkbox">
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-actions">
+                <button class="btn btn-primary">Save Appearance</button>
+                <button class="btn btn-outline">Reset to Default</button>
+              </div>
+            </div>
+
+            <!-- Training Preferences Tab -->
+            <div class="settings-panel" id="training-panel">
+              <h3>Training Preferences</h3>
+
+              <div class="settings-section">
+                <h4>Training Interests</h4>
+                <div class="interest-grid">
+                  <label class="interest-checkbox">
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                    Disaster Response
+                  </label>
+                  <label class="interest-checkbox">
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                    Risk Assessment
+                  </label>
+                  <label class="interest-checkbox">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                    Community Training
+                  </label>
+                  <label class="interest-checkbox">
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                    Emergency Management
+                  </label>
+                  <label class="interest-checkbox">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                    Medical Response
+                  </label>
+                  <label class="interest-checkbox">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                    Flood Management
+                  </label>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <h4>Preferred Training Formats</h4>
+                <div class="format-options">
+                  <label class="format-option">
+                    <input type="radio" name="format" value="online" checked>
+                    <span>Online Training</span>
+                  </label>
+                  <label class="format-option">
+                    <input type="radio" name="format" value="in-person">
+                    <span>In-Person Training</span>
+                  </label>
+                  <label class="format-option">
+                    <input type="radio" name="format" value="hybrid">
+                    <span>Hybrid (Both)</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <h4>Notification Preferences</h4>
+                <div class="training-notifications">
+                  <div class="notification-item">
+                    <div class="notification-info">
+                      <h5>Early Bird Registration</h5>
+                      <p>Get notified about training programs before general registration opens</p>
+                    </div>
+                    <label class="toggle">
+                      <input type="checkbox" checked>
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+
+                  <div class="notification-item">
+                    <div class="notification-info">
+                      <h5>Waitlist Availability</h5>
+                      <p>Notify when spots become available in full trainings</p>
+                    </div>
+                    <label class="toggle">
+                      <input type="checkbox" checked>
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-actions">
+                <button class="btn btn-primary">Save Preferences</button>
+              </div>
+            </div>
+
+            <!-- Data & Export Tab -->
+            <div class="settings-panel" id="data-panel">
+              <h3>Data & Export</h3>
+
+              <div class="settings-section">
+                <h4>Export Your Data</h4>
+                <p>Download a copy of all your data including profile information, training history, and certificates.
+                </p>
+                <div class="export-options">
+                  <div class="export-item">
+                    <div class="export-info">
+                      <h5>Complete Data Export</h5>
+                      <p>All your profile and training data in JSON format</p>
+                      <span class="export-size">~2.3 MB</span>
+                    </div>
+                    <button class="btn btn-outline">Export Data</button>
+                  </div>
+
+                  <div class="export-item">
+                    <div class="export-info">
+                      <h5>Training Certificates</h5>
+                      <p>All your earned certificates in PDF format</p>
+                      <span class="export-size">~1.8 MB</span>
+                    </div>
+                    <button class="btn btn-outline">Download All</button>
+                  </div>
+
+                  <div class="export-item">
+                    <div class="export-info">
+                      <h5>Enrollment History</h5>
+                      <p>Complete history of your training enrollments</p>
+                      <span class="export-size">~450 KB</span>
+                    </div>
+                    <button class="btn btn-outline">Export History</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <h4>Data Retention</h4>
+                <p>Your data is retained according to our privacy policy. You can request deletion of your account and
+                  associated data at any time.</p>
+                <div class="retention-info">
+                  <div class="retention-item">
+                    <span class="retention-label">Account created:</span>
+                    <span class="retention-value">January 15, 2024</span>
+                  </div>
+                  <div class="retention-item">
+                    <span class="retention-label">Last activity:</span>
+                    <span class="retention-value">February 20, 2026</span>
+                  </div>
+                  <div class="retention-item">
+                    <span class="retention-label">Data size:</span>
+                    <span class="retention-value">2.3 MB</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <h4>Account Deletion</h4>
+                <p class="warning-text">Permanently delete your account and all associated data. This action cannot be
+                  undone.</p>
+                <div class="deletion-confirm">
+                  <label class="confirm-checkbox">
+                    <input type="checkbox" id="confirmDelete">
+                    <span class="checkmark"></span>
+                    I understand that this action cannot be undone
+                  </label>
+                  <button class="btn btn-danger" id="deleteAccountBtn" disabled>Delete Account</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Admin Training Management Section -->
+      <section id="admin-trainings" class="section" style="display: none">
+        <h2>Admin - Manage Trainings</h2>
+        <p>Edit training details, mark attendance, and generate reports</p>
+
+        <div class="admin-panel">
+          <h3>Training Management</h3>
+          <div id="adminTrainingsList" class="training-admin-list"></div>
+        </div>
+      </section>
+
+      <!-- Admin Attendance Section -->
+      <section id="admin-attendance" class="section" style="display: none">
+        <h2>Admin - Mark Attendance</h2>
+
+        <div class="admin-panel">
+          <h3>Select Training & Mark Attendance</h3>
+          <div class="form-group">
+            <label>Select Training Event</label>
+            <select id="attendanceTrainingSelect" class="form-input">
+              <option value="">Choose a training...</option>
+            </select>
+          </div>
+
+          <div id="attendanceParticipants" style="display: none">
+            <h4>Participants</h4>
+            <div id="participantsList" class="participants-checklist"></div>
+            <button onclick="submitAttendance()" class="btn btn-primary" style="margin-top: 1rem">
+              Mark Attendance
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Admin Reports Section -->
+      <section id="admin-reports" class="section" style="display: none">
+        <h2>Admin - Reports & Downloads</h2>
+
+        <div class="admin-panel">
+          <h3>Training Reports</h3>
+          <div class="form-group">
+            <label>Select Training for Report</label>
+            <select id="reportTrainingSelect" class="form-input">
+              <option value="">Choose a training...</option>
+            </select>
+          </div>
+
+          <div id="reportContainer" style="display: none; margin-top: 2rem">
+            <h4>Report Summary</h4>
+            <div class="report-stats">
+              <div class="stat-box">
+                <span class="stat-label">Total Enrolled</span>
+                <span class="stat-value" id="reportTotalEnrolled">0</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">Present</span>
+                <span class="stat-value" id="reportPresent">0</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">Absent</span>
+                <span class="stat-value" id="reportAbsent">0</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">Attendance Rate</span>
+                <span class="stat-value" id="reportAttendanceRate">0%</span>
+              </div>
+            </div>
+
+            <div id="participantsReport" style="margin-top: 1.5rem"></div>
+
+            <button onclick="downloadReport()" class="btn btn-primary" style="margin-top: 1.5rem">
+              📥 Download Report (CSV)
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Sign In Modal -->
+  <div id="signInModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Create Account</h2>
+        <button type="button" class="modal-close" id="closeSignIn">
+          &times;
+        </button>
+      </div>
+      <form id="signInForm" class="auth-form">
+        <div class="form-group">
+          <label for="signInName" class="form-label">Full Name</label>
+          <input type="text" id="signInName" class="form-input" placeholder="Your full name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="signInEmail" class="form-label">Email</label>
+          <input type="email" id="signInEmail" class="form-input" placeholder="your@email.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="signInRole" class="form-label">Role</label>
+          <select id="signInRole" class="form-input" required>
+            <option value="">Select a role</option>
+            <option value="NDMA Admin">NDMA Admin</option>
+            <option value="State Admin">State Admin</option>
+            <option value="District/SDMA">District/SDMA</option>
+            <option value="Trainer">Trainer</option>
+            <option value="Participant">Participant</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="signInState" class="form-label">State</label>
+          <select id="signInState" class="form-input" required>
+            <option value="">Select a state</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="Goa">Goa</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Manipur">Manipur</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Odisha">Odisha</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Uttarakhand">Uttarakhand</option>
+            <option value="West Bengal">West Bengal</option>
+            <option value="Delhi">Delhi</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="signInPassword" class="form-label">Password</label>
+          <input type="password" id="signInPassword" class="form-input" placeholder="Minimum 6 characters" required />
+        </div>
+
+        <div class="form-group">
+          <label for="signInConfirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" id="signInConfirmPassword" class="form-input" placeholder="Confirm your password"
+            required />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">
+          Create Account
+        </button>
+
+        <div class="form-footer">
+          Already have an account?
+          <a href="#" id="switchToLogIn">Log In here</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Log In Modal -->
+  <div id="logInModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Log In</h2>
+        <button type="button" class="modal-close" id="closeLogIn">
+          &times;
+        </button>
+      </div>
+      <form id="logInForm" class="auth-form">
+        <div class="form-group">
+          <label for="logInEmail" class="form-label">Email</label>
+          <input type="email" id="logInEmail" class="form-input" placeholder="your@email.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="logInPassword" class="form-label">Password</label>
+          <input type="password" id="logInPassword" class="form-input" placeholder="Your password" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">Log In</button>
+
+        <div class="form-footer">
+          Don't have an account?
+          <a href="#" id="switchToSignIn">Sign Up here</a>
+        </div>
+      </form>
+
+      <div class="demo-credentials">
+        <p><strong>Demo Credentials:</strong></p>
+        <p>Email: rajesh.kumar@ndma.gov.in</p>
+        <p>Password: admin123</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Modal -->
+    <div id="chatModal" class="modal">
+      <div class="modal-content chat-modal-content">
+        <div class="modal-header">
+          <h2>🤖 SafeStep Assistant</h2>
+          <button type="button" class="modal-close" id="closeChat">
+            &times;
+          </button>
+        </div>
+        <div class="chat-container">
+          <div id="chatMessages" class="chat-messages">
+            <div class="message bot-message">
+              <div class="message-avatar">🤖</div>
+              <div class="message-content">
+                <p>Hello! I'm your SafeStep assistant. How can I help you with disaster training and management today?</p>
+              </div>
+            </div>
+          </div>
+          <div class="chat-input-container">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Type your message..." />
+            <button id="sendChatBtn" class="btn btn-primary">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Chatbot -->
+    <div id="floating-chatbot" class="floating-chatbot">
+      🤖
+    </div>
+
+  <footer class="footer">
+  <div class="footer-container">
+
+    <!-- Brand -->
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="/logo.jpeg" alt="SafeStep Logo">
+        <h3>SafeStep</h3>
+      </div>
+      <p class="footer-tagline">
+        Disaster Training & Management Platform
+      </p>
+      <p class="footer-desc">
+        A unified platform for disaster preparedness, training management,
+        analytics, and compliance monitoring.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-links">
+      <h4>Platform</h4>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#trainings">Training Events</a>
+      <a href="#analytics">Analytics</a>
+      <a href="#reports">Reports</a>
+    </div>
+
+    <!-- Resources -->
+    <div class="footer-links">
+      <h4>Resources</h4>
+      <a href="#">Help Center</a>
+      <a href="#">Documentation</a>
+      <a href="#">FAQs</a>
+      <a href="#">Support</a>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <p>📍 New Delhi, India</p>
+      <p>📧 support@safestep.gov.in</p>
+      <p>📞 +91 88 9952 0781</p>
+    </div>
+
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <p>© 2026 SafeStep. All rights reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Security</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+
+</html>
