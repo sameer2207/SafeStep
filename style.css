@@ -160,7 +160,6 @@ body {
 .btn-outline {
   background: transparent;
   color: #28a745;
-  border: 2px solid var(--teal);
 }
 
 .btn-outline:hover {
