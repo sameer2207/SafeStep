@@ -66,6 +66,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: min-content;
 }
 
 /* Logo Section */
@@ -118,6 +119,7 @@ body {
 .auth-buttons {
   display: flex;
   gap: 1rem;
+  height: 50px;
 }
 
 /* Button Styles */
